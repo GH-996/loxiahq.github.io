@@ -1,3 +1,5 @@
+https://dayone.loxia.cc/about/index.html
+https://dayone.loxia.cc/2023/08/16/hexo-github-pages/
 https://dayone.loxia.cc/2019/11/11/fpm-rpm/
 https://dayone.loxia.cc/2019/12/06/git-tag/
 https://dayone.loxia.cc/2019/12/04/git-remote/
@@ -11,12 +13,14 @@ https://dayone.loxia.cc/2019/12/05/git-reset/
 https://dayone.loxia.cc/2019/10/12/elasticsearch-add-node/
 https://dayone.loxia.cc/categories/index.html
 https://dayone.loxia.cc/tags/index.html
-https://dayone.loxia.cc/about/index.html
 https://dayone.loxia.cc/
 https://dayone.loxia.cc/tags/elasticsearch/
 https://dayone.loxia.cc/tags/linux/
 https://dayone.loxia.cc/tags/rpm/
 https://dayone.loxia.cc/tags/git/
+https://dayone.loxia.cc/tags/hexo/
+https://dayone.loxia.cc/tags/github/
 https://dayone.loxia.cc/categories/elasticsearch/
 https://dayone.loxia.cc/categories/linux/
 https://dayone.loxia.cc/categories/git/
+https://dayone.loxia.cc/categories/hexo/
