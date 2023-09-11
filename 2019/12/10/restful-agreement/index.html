@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"loxia.cc","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="本文主要介绍Elasticsearch如何下线节点。">
+  <meta name="description" content="本文主要罗列了一些Restful API常见的规范约定，在开发API的过程中可以参照此类约定。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Elasticsearch集群下线节点">
-<meta property="og:url" content="https://loxia.cc/2019/10/19/elasticsearch-offline-node/index.html">
+<meta property="og:title" content="Restful API 规范约定">
+<meta property="og:url" content="https://loxia.cc/2019/12/10/restful-agreement/index.html">
 <meta property="og:site_name" content="Loxia&#39;s Blog">
-<meta property="og:description" content="本文主要介绍Elasticsearch如何下线节点。">
+<meta property="og:description" content="本文主要罗列了一些Restful API常见的规范约定，在开发API的过程中可以参照此类约定。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2019-10-19T08:33:17.000Z">
-<meta property="article:modified_time" content="2023-08-09T09:51:37.448Z">
+<meta property="article:published_time" content="2019-12-10T05:51:50.000Z">
+<meta property="article:modified_time" content="2023-09-11T02:14:22.483Z">
 <meta property="article:author" content="Loxia">
-<meta property="article:tag" content="elasticsearch">
+<meta property="article:tag" content="restful">
+<meta property="article:tag" content="develop">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://loxia.cc/2019/10/19/elasticsearch-offline-node/">
+<link rel="canonical" href="https://loxia.cc/2019/12/10/restful-agreement/">
 
 
 <script id="page-configurations">
@@ -46,7 +47,7 @@
   };
 </script>
 
-  <title>Elasticsearch集群下线节点 | Loxia's Blog</title>
+  <title>Restful API 规范约定 | Loxia's Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEPDR5FJTC"></script>
     <script>
@@ -175,7 +176,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://loxia.cc/2019/10/19/elasticsearch-offline-node/">
+    <link itemprop="mainEntityOfPage" href="https://loxia.cc/2019/12/10/restful-agreement/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -188,7 +189,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Elasticsearch集群下线节点
+          Restful API 规范约定
         </h1>
 
         <div class="post-meta">
@@ -198,7 +199,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-10-19 16:33:17" itemprop="dateCreated datePublished" datetime="2019-10-19T16:33:17+08:00">2019-10-19</time>
+              <time title="Created: 2019-12-10 13:51:50" itemprop="dateCreated datePublished" datetime="2019-12-10T13:51:50+08:00">2019-12-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -206,7 +207,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/elasticsearch/" itemprop="url" rel="index"><span itemprop="name">elasticsearch</span></a>
+                  <a href="/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
                 </span>
             </span>
 
@@ -228,23 +229,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文主要介绍<code>Elasticsearch</code>如何下线节点。</p>
+        <p>本文主要罗列了一些<code>Restful API</code>常见的规范约定，在开发API的过程中可以参照此类约定。</p>
 <span id="more"></span>
 
-<h3 id="1、将节点从集群路由策略中排除"><a href="#1、将节点从集群路由策略中排除" class="headerlink" title="1、将节点从集群路由策略中排除"></a>1、将节点从集群路由策略中排除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 移除es节点所在IP</span></span><br><span class="line">curl -H <span class="string">&#x27;Content-Type: application/json&#x27;</span> -XPUT http://esip:esport/_cluster/settings?pretty -d <span class="string">&#x27;&#123;&quot;transient&quot;:&#123;&quot;cluster.routing.allocation.exclude._ip&quot;:&quot;10.10.10.11&quot;&#125;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 移除指定es节点</span></span><br><span class="line">curl -H <span class="string">&#x27;Content-Type: application/json&#x27;</span> -XPUT http://esip:esport/_cluster/settings?pretty -d <span class="string">&#x27;&#123;&quot;transient&quot;:&#123;&quot;cluster.routing.allocation.exclude._name&quot;: &quot;es-10-01_data-node2, es-10-01_data-node2&quot;&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h4><p>API 与用户的通信协议, 总是使用 HTTPS 协议。</p>
+<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><p>将 API 的版本号放入 URL 中, 由于一个项目多个 APP 所以 Jumpserver 使用以下风格, 将版本号放到 APP 后面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://example.com/api/:app:/:version:/:resource:</span><br><span class="line">https://example.com/api/assets/v1.0/assets [GET, POST]</span><br><span class="line">https://example.com/api/assets/v1.0/assets/1 [GET, PUT, DELETE]</span><br></pre></td></tr></table></figure>
 
-<h3 id="2、等待节点上分片全部被迁移"><a href="#2、等待节点上分片全部被迁移" class="headerlink" title="2、等待节点上分片全部被迁移"></a>2、等待节点上分片全部被迁移</h3><blockquote>
-<p> 检查集群状态，若出现pening_tasks，当pending_tasks的等级&gt;&#x3D;HIGH时，存在集群无法新建索引的风险 </p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl --insecure http://esip:esport/_cat/health?v</span><br><span class="line">curl --insecure http://esip:esport/_cluster/pending_tasks?pretty</span><br></pre></td></tr></table></figure>
+<h4 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h4><p>路径又称”终点”(endpoint), 表示 API 的具体网址。 在<code>RESTful</code>架构中, 每个网址代表一种资源(Resource), 所以网址中不能有动词, 只能有名词, 而且所用的名词往往与数据库的表格名对应。一般来说, 数据库中的表都是同种记录的”集合”(Collection), 所以 API 中的名词也应该使用复数。 举例来说<code>Cmdb</code>中的<code>Assets</code>列表,<code>IDC</code>列表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https://example.com/api/:app:/:version:/:resource:</span><br><span class="line"></span><br><span class="line">https://example.com/api/assets/v1.0/assets [GET, POST]</span><br><span class="line">https://example.com/api/assets/v1.0/assets/1 [GET, PUT, DELETE]</span><br><span class="line">https://example.com/api/assets/v1.0/idcs [GET, POST]</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>若集群中出现UNASSIGNED shards,检查原因，查看是否是分配策略导致无法迁移分片</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --insecure https://esip:esport/_cluster/allocation/explain?pretty</span><br></pre></td></tr></table></figure>
+<p>一般性的增删查改(CRUD)API, 完全使用<code>HTTP Method</code>加上<code>URL</code>提供的语义,<code>URL</code>中的可变部分(比如上面提到的), 一般用来传递该API操作的核心实体对象的唯一<code>ID</code>, 如果有更多的参数需要提供, GET 方法请使用<code>URL Parameter(例如：&quot;?client_id=xxxxx&amp;app_id=xxxxxx&quot;), PUT/POST/DELETE</code>方法请使用请求体传递参数。</p>
+<h4 id="HTTP-Method"><a href="#HTTP-Method" class="headerlink" title="HTTP Method"></a>HTTP Method</h4><p>对于资源的具体操作类型, 由 HTTP 动词表示。</p>
+<p>常用的HTTP动词有下面五个(括号里是对应的<code>SQL</code>命令)。</p>
+<ul>
+<li>GET(SELECT)：从服务器取出资源(一项或多项)。</li>
+<li>POST(CREATE)：在服务器新建一个资源。</li>
+<li>PUT(UPDATE)：在服务器更新资源(客户端提供改变后的完整资源, 幂等</li>
+<li>PATCH(UPDATE)：在服务器更新资源(客户端提供改变的属性)。</li>
+<li>DELETE(DELETE)：从服务器删除资源。</li>
+</ul>
+<h4 id="过滤信息"><a href="#过滤信息" class="headerlink" title="过滤信息"></a>过滤信息</h4><p>常见参数约定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">?keyword=localhost 模糊搜索</span><br><span class="line">?limit=10：指定返回记录的数量</span><br><span class="line">?offset=10：指定返回记录的开始位置。</span><br><span class="line">?page=2&amp;per_page=100：指定第几页, 以及每页的记录数。</span><br><span class="line">?sort=name&amp;order=asc：指定返回结果按照哪个属性排序, 以及排序顺序。</span><br><span class="line">?asset_id=1：指定筛选条件</span><br></pre></td></tr></table></figure>
 
-<h3 id="3、下线节点、停止服务"><a href="#3、下线节点、停止服务" class="headerlink" title="3、下线节点、停止服务"></a>3、下线节点、停止服务</h3><h3 id="4、取消节点禁用策略"><a href="#4、取消节点禁用策略" class="headerlink" title="4、取消节点禁用策略"></a>4、取消节点禁用策略</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&#x27;Content-Type: application/json&#x27;</span> -XPUT --insecure http://esip:esport/_cluster/settings?pretty -d <span class="string">&#x27;&#123;&quot;transient&quot;:&#123;&quot;cluster.routing.allocation.exclude._ip&quot;: null&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h4><p>针对不同操作, 服务器向用户返回的结果应该符合以下规范。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /collection：返回资源对象的列表(数组)</span><br><span class="line">GET /collection/resource：返回单个资源对象</span><br><span class="line">POST /collection：返回新生成的资源对象</span><br><span class="line">PUT /collection/resource：返回完整的资源对象</span><br><span class="line">PATCH /collection/resource：返回完整的资源对象</span><br><span class="line">DELETE /collection/resource：返回一个空文档</span><br></pre></td></tr></table></figure>
 
+<h4 id="Hypermedia-API"><a href="#Hypermedia-API" class="headerlink" title="Hypermedia API"></a>Hypermedia API</h4><p><code>RESTful API</code>最好做到<code>Hypermedia</code>, 即返回结果中提供链接, 连向其他<code>API</code>方法, 使得用户不查文档, 也知道下一步应该做什么。 比如, 当用户向<code>api.example.com</code>的根目录发出请求, 会得到这样一个文档。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;link&quot;: &#123;</span><br><span class="line">  &quot;rel&quot;:   &quot;collection https://www.example.com/zoos&quot;,</span><br><span class="line">  &quot;href&quot;:  &quot;https://api.example.com/zoos&quot;,</span><br><span class="line">  &quot;title&quot;: &quot;List of zoos&quot;,</span><br><span class="line">  &quot;type&quot;:  &quot;application/vnd.yourformat+json&quot;</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码表示, 文档中有一个 Link 属性, 用户读取这个属性就知道下一步该调用什么 API 了。</p>
+<ul>
+<li>rel 表示这个 API 与当前网址的关系(Collection 关系, 并给出该 Collection 的网址)</li>
+<li>href 表示 API 的路径</li>
+<li>title 表示 API 的标题</li>
+<li>type 表示返回类型</li>
+</ul>
+<p>Hypermedia API 的设计被称为 HATEOAS。 Github API 就是这种设计。</p>
+<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><ol>
+<li><code>API</code>的身份认证应该使用<code>OAuth 2.0</code>框架。</li>
+<li>服务器返回的数据格式, 应该尽量使用<code>JSON</code>。</li>
+</ol>
 
     </div>
 
@@ -255,7 +280,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/elasticsearch/" rel="tag"><i class="fa fa-tag"></i> elasticsearch</a>
+              <a href="/tags/restful/" rel="tag"><i class="fa fa-tag"></i> restful</a>
+              <a href="/tags/develop/" rel="tag"><i class="fa fa-tag"></i> develop</a>
           </div>
 
         
@@ -264,12 +290,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/10/12/elasticsearch-add-node/" rel="prev" title="Elasticsearch集群新增节点">
-      <i class="fa fa-chevron-left"></i> Elasticsearch集群新增节点
+    <a href="/2019/12/09/git-tutorial/" rel="prev" title="git 基础命令">
+      <i class="fa fa-chevron-left"></i> git 基础命令
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/11/08/file-opens/" rel="next" title="文件打开数">
-      文件打开数 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/08/16/hexo-github-pages/" rel="next" title="在 GitHub Pages 上部署 Hexo">
+      在 GitHub Pages 上部署 Hexo <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -329,7 +355,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%B0%86%E8%8A%82%E7%82%B9%E4%BB%8E%E9%9B%86%E7%BE%A4%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E4%B8%AD%E6%8E%92%E9%99%A4"><span class="nav-number">1.</span> <span class="nav-text">1、将节点从集群路由策略中排除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%AD%89%E5%BE%85%E8%8A%82%E7%82%B9%E4%B8%8A%E5%88%86%E7%89%87%E5%85%A8%E9%83%A8%E8%A2%AB%E8%BF%81%E7%A7%BB"><span class="nav-number">2.</span> <span class="nav-text">2、等待节点上分片全部被迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%B8%8B%E7%BA%BF%E8%8A%82%E7%82%B9%E3%80%81%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">3、下线节点、停止服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E5%8F%96%E6%B6%88%E8%8A%82%E7%82%B9%E7%A6%81%E7%94%A8%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">4、取消节点禁用策略</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84"><span class="nav-number">3.</span> <span class="nav-text">路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-Method"><span class="nav-number">4.</span> <span class="nav-text">HTTP Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E4%BF%A1%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">过滤信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">返回结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hypermedia-API"><span class="nav-number">7.</span> <span class="nav-text">Hypermedia API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">8.</span> <span class="nav-text">其它</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
