@@ -1,3 +1,4 @@
+https://loxia.cc/2019/06/22/restful-design/
 https://loxia.cc/about/index.html
 https://loxia.cc/2023/08/16/hexo-github-pages/
 https://loxia.cc/2019/11/11/fpm-rpm/
@@ -20,7 +21,10 @@ https://loxia.cc/tags/linux/
 https://loxia.cc/tags/rpm/
 https://loxia.cc/tags/hexo/
 https://loxia.cc/tags/github/
+https://loxia.cc/tags/restful/
+https://loxia.cc/tags/develop/
 https://loxia.cc/categories/elasticsearch/
 https://loxia.cc/categories/git/
 https://loxia.cc/categories/linux/
 https://loxia.cc/categories/hexo/
+https://loxia.cc/categories/develop/
