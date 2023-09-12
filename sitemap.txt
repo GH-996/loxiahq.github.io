@@ -1,3 +1,5 @@
+https://loxia.cc/2019/12/11/expand-disk-with-lvm/
+https://loxia.cc/2017/09/08/dell-omsa/
 https://loxia.cc/2023/09/01/privacy-policy/
 https://loxia.cc/2019/12/10/restful-agreement/
 https://loxia.cc/2019/06/22/restful-design/
@@ -25,6 +27,8 @@ https://loxia.cc/tags/hexo/
 https://loxia.cc/tags/github/
 https://loxia.cc/tags/restful/
 https://loxia.cc/tags/develop/
+https://loxia.cc/tags/dell/
+https://loxia.cc/tags/omsa/
 https://loxia.cc/categories/elasticsearch/
 https://loxia.cc/categories/git/
 https://loxia.cc/categories/linux/
