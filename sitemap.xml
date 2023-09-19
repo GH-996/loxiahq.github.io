@@ -184,7 +184,7 @@
 
   <url>
     <loc>https://loxia.cc/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -192,70 +192,70 @@
   
   <url>
     <loc>https://loxia.cc/tags/elasticsearch/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/git/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/linux/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/rpm/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/hexo/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/github/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/restful/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/develop/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/dell/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/tags/omsa/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -264,35 +264,35 @@
   
   <url>
     <loc>https://loxia.cc/categories/elasticsearch/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/categories/git/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/categories/linux/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/categories/hexo/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://loxia.cc/categories/develop/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
